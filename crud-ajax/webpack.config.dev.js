@@ -1,26 +1,26 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
-const Dotenv = require('dotenv-webpack');
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
+const Dotenv = require("dotenv-webpack");
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: "./src/index.js",
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: '[name].[contenthash].js',
-    assetModuleFilename: 'assets/images/[hash][ext][query]'
+    path: path.resolve(__dirname, "dist"),
+    filename: "[name].[contenthash].js",
+    assetModuleFilename: "assets/images/[hash][ext][query]",
   },
-  mode: 'development',
+  mode: "development",
   resolve: {
-    extensions: ['.js'],
+    extensions: [".js"],
     alias: {
-      '@utils': path.resolve(__dirname, 'src/utils/'),
-      '@templates': path.resolve(__dirname, 'src/templates/'),
-      '@styles': path.resolve(__dirname, 'src/styles/'),
-      '@images': path.resolve(__dirname, 'src/assets/images/'),
-    }
+      "@utils": path.resolve(__dirname, "src/utils/"),
+      "@templates": path.resolve(__dirname, "src/templates/"),
+      "@styles": path.resolve(__dirname, "src/styles/"),
+      "@images": path.resolve(__dirname, "src/assets/images/"),
+    },
   },
   module: {
     rules: [
@@ -28,24 +28,21 @@ module.exports = {
         test: /\.m?js$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader'
-        }
+          loader: "babel-loader",
+        },
       },
       {
         test: /\.css|.styl$/i,
-        use: [MiniCssExtractPlugin.loader,
-          'css-loader',
-          'stylus-loader'
-        ],
+        use: [MiniCssExtractPlugin.loader, "css-loader", "stylus-loader"],
       },
       {
         test: /\.png/,
-        type: 'asset/resource'
+        type: "asset/resource",
       },
       {
         test: /\.(woff|woff2)$/,
         use: {
-          loader: 'url-loader',
+          loader: "url-loader",
           options: {
             limit: 10000,
             mimetype: "application/font-woff",
@@ -54,33 +51,33 @@ module.exports = {
             publicPath: "../assets/fonts/",
             esModule: false,
           },
-        }
-      }
-    ]
+        },
+      },
+    ],
   },
   plugins: [
     new HtmlWebpackPlugin({
       inject: true,
-      template: './public/index.html',
-      filename: './index.html'
+      template: "./public/index.html",
+      filename: "./index.html",
     }),
     new MiniCssExtractPlugin({
-      filename: 'assets/[name].[contenthash].css'
+      filename: "assets/[name].[contenthash].css",
     }),
     new CopyPlugin({
       patterns: [
         {
           from: path.resolve(__dirname, "src", "assets/images"),
-          to: "assets/images"
-        }
-      ]
+          to: "assets/images",
+        },
+      ],
     }),
     new Dotenv(),
     // new BundleAnalyzerPlugin(),
   ],
   devServer: {
     static: {
-      directory: path.join(__dirname, 'dist'),
+      directory: path.join(__dirname, "dist"),
       // contenBase: path.join(__dirname, 'dist'),
     },
     //contentBase: path.join(__dirname, 'dist'),
@@ -88,4 +85,4 @@ module.exports = {
     historyApiFallback: true,
     port: 9000,
   },
-}
+};

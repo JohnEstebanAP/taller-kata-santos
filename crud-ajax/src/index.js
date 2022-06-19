@@ -1,142 +1,42 @@
-//import Template from '@templates/Template.js';
-import '@styles/main.css';
-//import '@styles/vars.styl';
+//import "@styles/main.css";
 
-const botonAgregar = document.querySelector('.boton-agregar');
-const listaTarea = document.querySelector('.lista-tareas');
-const botonLimpiar = document.querySelector('.boton-limpiar');
+const container = document.querySelector(".container");
+const fragment = document.createDocumentFragment();
+const xhr = new XMLHttpRequest("xhr");
+var $xhr = document.getElementById("xhr");
 
-botonAgregar.addEventListener('click', () =>{
-  //método para agregar una tarea
-  agregarTarea("");
-});
+// pratica de conectivida con ajax 🤓
+(() => {
 
-botonLimpiar.addEventListener('click', ()=>{
-  //método Limpiar
-  limpiarTodo();
-});
+  xhr.addEventListener("readystatechange", (e) => {
+    //para que se ejecute una sola bes y no 4 beses del ciclo de vida
+    if (xhr.readyState !== 4) return;
 
-listaTarea.addEventListener('click', (event)=>{
-  //método para eliminar una tarea
-  if(event.path[0].type == 'submit'){
-    eliminarTarea(event.path[1].id);
-  }
-});
-
-listaTarea.addEventListener('keypress', (event)=>{
-  //método editar
-  if(event.keyCode == 13){
-    editarTarea(event.path[1].id, event.path[0].value);
-
-  }
-});
-
-
-//Local Starage
-var arregloTareas = [];
-var contador = 0;
-
-const getContador = ()=>{
-  return localStorage.getItem("contador");
-}
-
-const setContador = ()=>{
-  localStorage.setItem("contador",contador);
-}
-
-const getArregloTareas = ()=>{
-  return JSON.parse(localStorage.getItem("arregloTareas"));
-}
-
-const setArregloTareas = ()=>{
-  setContador();
-  localStorage.setItem("arregloTareas", JSON.stringify(arregloTareas));
-  listarTareas()
-}
-
-const inicializarContador = ()=> {
-  if(getContador() != null){
-   contador = getContador();
-  }
-}
-
-const agregarTarea = (description)=>{
-  contador++;
-  let objetoTarea = {
-    id: contador,
-    descripcion:  description
-  }
-  if(getArregloTareas() !=  null){
-  arregloTareas = getArregloTareas();
-  }
-
-  arregloTareas.push(objetoTarea);
-  setArregloTareas();
-}
-
-const eliminarTarea=(idTarea) =>{
-  let datos = getArregloTareas();
-  let newArreglo = [];
-  if(datos != null){
-
-    for(const tarea of datos){
-      if(tarea.id != idTarea){
-        newArreglo.push(tarea);
-      }
+    //berificamos las repuestas correctas.
+    if (xhr.status >= 200 && xhr.status < 300) {
+      let json = JSON.parse(xhr.responseText);
+      llenarData(json);
+    } else {
+      let message = xhr.statusText || "Ocurrió un error";
+      console.log(`Error ${xhr.status}: ${message}`);
+      $xhr.innerHTML =  `Error ${xhr.status}: ${message}`;
     }
-  }
-  arregloTareas = newArreglo;
-  setArregloTareas();
-}
+  });
 
-const listarTareas = () =>{
-  listaTarea.innerHTML = '';
-  let datos = getArregloTareas().reverse();
-  for(const tarea of datos){
-    listaTarea.innerHTML += `
-      <li id="${tarea.id}">
-        <input type="text" class="input-tarea" value ="${tarea.descripcion}">
-        <button class="boton-eliminar">X</button>
-      </li>
-    `
-  }
-}
+  const url = "http://jsonplaceholder.typicode.com/users";
+  const method = "GET";
+  xhr.open(method || "GET", url);
+  xhr.send();
+})();
 
-const editarTarea = (idTarea, description) => {
-  let newTarea = {
-    id: idTarea,
-    descripcion: description
-  }
-  let datos = getArregloTareas();
-  let newArreglo = [];
-  if(datos != null){
+const llenarData = (res) => {
+  console.log(res);
 
-    for(const tarea of datos){
-      if(tarea.id == idTarea){
-        newArreglo.push(newTarea);
-      }else{
-        newArreglo.push(tarea);
-      }
-
-    }
-  }
-  arregloTareas = newArreglo;
-  setArregloTareas();
-}
-
-//Método para limpior todas las tareas
-const limpiarTodo = () =>{
- arregloTareas = [];
-  contador = 0;
-  setArregloTareas();
-  setContador();
-}
-
-//inicio
-inicializarContador();
-listarTareas()
-
-//(async function App() {
-  //const main = null || document.querySelector(".container");
-  //main.innerHTML = await Template();
-//})();
+  res.forEach((el) => {
+    const li = document.createElement("li");
+    li.innerHTML = `${el.name} -- ${el.email} -- ${el.phone}`;
+    container.appendChild(li);
+  });
+  // $xhr.appendChild(container);
+  // container.querySelector("tbody").appendChild(fragment);
+};
