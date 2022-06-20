@@ -1,9 +1,10 @@
 //import "@styles/main.css";
+import "@assets/db.json";
 
 const container = document.querySelector(".container");
 const fragment = document.createDocumentFragment();
 const xhr = new XMLHttpRequest("xhr");
-var $xhr = document.getElementById("xhr");
+var $xhr = document.querySelector(".container");
 
 // pratica de conectivida con ajax 🤓
 (() => {
@@ -24,6 +25,7 @@ var $xhr = document.getElementById("xhr");
   });
 
   const url = "http://jsonplaceholder.typicode.com/users";
+  // const url = "assets/db.json";
   const method = "GET";
   xhr.open(method || "GET", url);
   xhr.send();
