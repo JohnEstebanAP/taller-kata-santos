@@ -12,7 +12,7 @@
   </head>
 
   <body>
-    <h1>CRUD AJAX</h1>
+    <h1>CRUD AXIOS</h1>
     <section class="crud container">
       <article>
         <h2 class="crud-title">Agregar Santos</h2>
@@ -22,7 +22,7 @@
           <input type="text" name="constelacion" placeholder="constelación" class="form-control is-valid" id="inputValid" required>
           <br>
           <button type="submit" class="btn btn-outline-primary" value="Enviar">Enviar</button>
-          <input type="hidden" name="action">
+          <input type="hidden" name="id">
         </form>
       </article>
       <article>
@@ -51,7 +51,7 @@
         </td>
       </tr>
     </template>
-    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="../src/index.js"  crossorigin="anonymous"></script>
     </body>
 </html>
