@@ -21,7 +21,7 @@ const fragment2 = d2.createDocumentFragment();
       template2.querySelector(".edit").dataset.id = el.id;
       template2.querySelector(".edit").dataset.name = el.nombre;
       template2.querySelector(".edit").dataset.constellation = el.de;
-      template2.querySelector(".delete").dataset.id = el.id;
+      template2.querySelector(".delete-dios").dataset.id = el.id;
 
       let clonetemplate2 = d2.importNode(template2, true);
       fragment2.appendChild(clonetemplate2);
@@ -52,7 +52,7 @@ const addDios = async (event) => {
           },
           data: JSON.stringify({
             nombre: event.target.nombre.value,
-            constelacion: event.target.constelacion.value,
+            de: event.target.constelacion.value,
           })
         }
         let res = await axios(url2, options);
@@ -71,7 +71,7 @@ const addDios = async (event) => {
           },
           data: JSON.stringify({
             nombre: event.target.nombre.value,
-            constelacion: event.target.constelacion.value,
+            de: event.target.constelacion.value,
           })
         }
         let res = await axios(url2 + event.target.id.value, options);
@@ -90,13 +90,13 @@ const addDios = async (event) => {
  */
 const editDios = async (event) => {
   if (event.target.matches(".edit")) {
-    title2.textContent = "Editar santo";
+    title2.textContent = "Editar Dios";
     from2.nombre.value = event.target.dataset.name;
     from2.constelacion.value = event.target.dataset.constellation;
     from2.id.value = event.target.dataset.id;
   }
 
-  if (event.target.matches(".delete")) {
+  if (event.target.matches(".delete-dios")) {
     let isDelete = confirm(
       `¿Estás seguro de elimenar el id ${event.target.id}?`
     );
