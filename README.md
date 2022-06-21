@@ -5,5 +5,5 @@ Se creo una api falsa, con el CRUD para la api de los “caballeros del zodiaco�
 Se realizaron mejoras en el diseño gráfico, refactorización del código y se agregaron funcionalidades extra como el CRUD para los dioses.
 
 ## Video #
-<a href="">Video de explicación.</a>
+<a href="https://youtu.be/Y36i8o-ul-w">Video de explicación.</a>
 
