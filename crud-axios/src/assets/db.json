@@ -11,14 +11,9 @@
       "constelacion": "Dragón"
     },
     {
-      "id": 3,
-      "nombre": "Hyoga",
-      "constelacion": "Cisne"
-    },
-    {
-      "id": 4,
-      "nombre": "Shun",
-      "constelacion": "Andrómeda"
+      "nombre": "Doko",
+      "constelacion": "Andrómeda",
+      "id": 4
     },
     {
       "id": 5,
@@ -26,9 +21,9 @@
       "constelacion": "Fénix"
     },
     {
-      "id": 6,
-      "nombre": "shun",
-      "constelacion": "Canser"
+      "nombre": "Hyoga",
+      "constelacion": "Cisne",
+      "id": 6
     }
   ],
   "dioses": [

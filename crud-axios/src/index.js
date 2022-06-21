@@ -50,16 +50,13 @@ const addSaint = async (event) => {
           headers: {
             "Content-type": "application/json;charset=utf-8",
           },
-          body: JSON.stringify({
+          data: JSON.stringify({
             nombre: event.target.nombre.value,
             constelacion: event.target.constelacion.value,
-          }),
-        };
-        let res = await fetch(url1, options);
-
-        if (!res.ok) {
-          throw new Error({ status: res.status, statusText: res.statusText });
+          })
         }
+        let res = await axios(url1, options);
+
         location.reload();
       } catch (err) {
         errorPeticion(err);
@@ -72,16 +69,13 @@ const addSaint = async (event) => {
           headers: {
             "Content-type": "application/json;charset=utf-8",
           },
-          body: JSON.stringify({
+          data: JSON.stringify({
             nombre: event.target.nombre.value,
             constelacion: event.target.constelacion.value,
-          }),
-        };
-        let res = await fetch(url1 + event.target.id.value, options);
-
-        if (!res.ok) {
-          throw new Error({ status: res.status, statusText: res.statusText });
+          })
         }
+        let res = await axios(url1 + event.target.id.value, options);
+
         location.reload();
       } catch (err) {
         errorPeticion(err);
@@ -115,11 +109,8 @@ const editSaint = async (event) => {
             "Content-type": "application/json;charset=utf-8",
           }
         };
-        let res = await fetch(url1 + event.target.dataset.id, options);
-
-        if (!res.ok) {
-          throw new Error({ status: res.status, statusText: res.statusText });
-        }
+        let res = await axios(url1 + event.target.dataset.id, options);
+        
         location.reload();
       } catch (err) {
         errorPeticion(err);
@@ -132,7 +123,7 @@ const errorPeticion = (err) => {
   let message = err.statusText || "Ocurrió un error";
   table.insertAdjacentHTML(
     "afterend",
-    `<p><b>Erre ${err.status}:${message}</b></p>)`
+    `<p><b>Error ${err.status}:${message}</b></p>)`
   );
 };
 /**
