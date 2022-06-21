@@ -12,8 +12,9 @@
   </head>
 
   <body>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <h1>CRUD AXIOS</h1>
-    <section class="crud container">
+    <section id="santos" class="crud container">
       <article>
         <h2 class="crud-title">Agregar Santos</h2>
         <form class="crud-from">
@@ -40,18 +41,60 @@
           </tbody>
         </table>
       </article>
+   
+      <template id="crud-template">
+        <tr>
+          <td class="name">Seiya</td>
+          <td class="constellation">Pegaso</td>
+          <td>
+            <button type="button" class="edit btn btn-success">Editar</button>
+            <button type="button" class="delete btn btn-dark">Eliminar</button>
+          </td>
+        </tr>
+      </template>
+      <script src="../src/index.js"  crossorigin="anonymous"></script>
     </section>
-    <template id="crud-template">
-      <tr>
-        <td class="name">Seiya</td>
-        <td class="constellation">Pegaso</td>
-        <td>
-          <button type="button" class="edit btn btn-success">Editar</button>
-          <button type="button" class="delete btn btn-dark">Eliminar</button>
-        </td>
-      </tr>
-    </template>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="../src/index.js"  crossorigin="anonymous"></script>
+    <br>
+    <br>
+    <section id="dioses" class="crud container">
+      <article>
+        <h2 class="crud-title-dioses">Agregar Dioses</h2>
+        <form class="crud-from-dioses">
+          <input type="text" name="nombre" placeholder="nombre" class="form-control is-valid" id="inputValid" required>
+          <br>
+          <input type="text" name="constelacion" placeholder="constelación" class="form-control is-valid" id="inputValid" required>
+          <br>
+          <button type="submit" class="btn btn-outline-primary" value="Enviar">Enviar</button>
+          <input type="hidden" name="id">
+        </form>
+      </article>
+      <article>
+        <h2>Ver Dioses</h2>
+        <table class="crud-table-dioses table table-dark table-hover">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Dios de</th>
+              <th>Accines</th>
+            </tr>
+          </thead>
+          <tbody>
+   
+          </tbody>
+        </table>
+      </article>
+   
+      <template id="crud-template-dioses">
+        <tr>
+          <td class="name">Seiya</td>
+          <td class="constellation">Pegaso</td>
+          <td>
+            <button type="button" class="edit btn btn-success">Editar</button>
+            <button type="button" class="delete btn btn-dark">Eliminar</button>
+          </td>
+        </tr>
+      </template>
+      <script src="../src/indexDioses.js"  crossorigin="anonymous"></script>
+    </section>
     </body>
 </html>

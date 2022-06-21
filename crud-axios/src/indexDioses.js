@@ -1,34 +1,35 @@
-const url1 = "http://localhost:5555/santos/";
-const d = document;
-const table = d.querySelector(".crud-table");
-const from = d.querySelector(".crud-from");
-const title = d.querySelector(".crud-title");
-const template = d.querySelector("#crud-template").content;
-const fragment = d.createDocumentFragment();
+const url2 = "http://localhost:5555/dioses/";
+
+const d2 = document;
+const table2 = d2.querySelector(".crud-table-dioses");
+const from2 = d2.querySelector(".crud-from-dioses");
+const title2 = d2.querySelector(".crud-title-dioses");
+const template2 = d2.querySelector("#crud-template-dioses").content;
+const fragment2 = d2.createDocumentFragment();
 
 /**
  * Metodo para consultar la data de los santos de Athena, y pintarlos en pantalla
  */
- const getAll = async () => {
+ const getAll2 = async () => {
   try {
-    let res = await axios.get(url1);
+    let res = await axios.get(url2);
     let json = await res.data;
 
     json.forEach((el) => {
-      template.querySelector(".name").textContent = el.nombre;
-      template.querySelector(".constellation").textContent = el.constelacion;
-      template.querySelector(".edit").dataset.id = el.id;
-      template.querySelector(".edit").dataset.name = el.nombre;
-      template.querySelector(".edit").dataset.constellation = el.constelacion;
-      template.querySelector(".delete").dataset.id = el.id;
+      template2.querySelector(".name").textContent = el.nombre;
+      template2.querySelector(".constellation").textContent = el.de;
+      template2.querySelector(".edit").dataset.id = el.id;
+      template2.querySelector(".edit").dataset.name = el.nombre;
+      template2.querySelector(".edit").dataset.constellation = el.de;
+      template2.querySelector(".delete").dataset.id = el.id;
 
-      let cloneTemplate = d.importNode(template, true);
-      fragment.appendChild(cloneTemplate);
+      let clonetemplate2 = d2.importNode(template2, true);
+      fragment2.appendChild(clonetemplate2);
     });
 
-    table.querySelector("tbody").appendChild(fragment);
+    table2.querySelector("tbody").appendChild(fragment2);
   } catch(err) {
-    errorPeticion(err);
+    errorPeticion2(err);
   }
 };
 
@@ -36,8 +37,8 @@ const fragment = d.createDocumentFragment();
  * Metodo para Crear nuevos santos mediarte ajax y el método POST o editar un santo con el método PUT
  * @param {event} event
  */
-const addSaint = async (event) => {
-  if (event.target === from) {
+const addDios = async (event) => {
+  if (event.target === from2) {
     //prevenimos el comportamiento por defecto e un formulario
     event.preventDefault();
 
@@ -54,11 +55,11 @@ const addSaint = async (event) => {
             constelacion: event.target.constelacion.value,
           })
         }
-        let res = await axios(url1, options);
+        let res = await axios(url2, options);
 
         location.reload();
       } catch (err) {
-        errorPeticion(err);
+        errorPeticion2(err);
       }
     } else {
       //PUT
@@ -73,11 +74,11 @@ const addSaint = async (event) => {
             constelacion: event.target.constelacion.value,
           })
         }
-        let res = await axios(url1 + event.target.id.value, options);
+        let res = await axios(url2 + event.target.id.value, options);
 
         location.reload();
       } catch (err) {
-        errorPeticion(err);
+        errorPeticion2(err);
       }
     }
   }
@@ -87,12 +88,12 @@ const addSaint = async (event) => {
  * Método para editar un santo Mediante el métood PUT o eliminarlo Mediante el método DELETE
  * @param {event} event
  */
-const editSaint = async (event) => {
+const editDios = async (event) => {
   if (event.target.matches(".edit")) {
-    title.textContent = "Editar santo";
-    from.nombre.value = event.target.dataset.name;
-    from.constelacion.value = event.target.dataset.constellation;
-    from.id.value = event.target.dataset.id;
+    title2.textContent = "Editar santo";
+    from2.nombre.value = event.target.dataset.name;
+    from2.constelacion.value = event.target.dataset.constellation;
+    from2.id.value = event.target.dataset.id;
   }
 
   if (event.target.matches(".delete")) {
@@ -108,19 +109,19 @@ const editSaint = async (event) => {
             "Content-type": "application/json;charset=utf-8",
           }
         };
-        let res = await axios(url1 + event.target.dataset.id, options);
-
+        let res = await axios(url2 + event.target.dataset.id, options);
+        
         location.reload();
       } catch (err) {
-        errorPeticion(err);
+        errorPeticion2(err);
       }
     }
   }
 };
 
-const errorPeticion = (err) => {
+const errorPeticion2 = (err) => {
   let message = err.statusText || "Ocurrió un error";
-  table.insertAdjacentHTML(
+  table2.insertAdjacentHTML(
     "afterend",
     `<p><b>Error ${err.status}:${message}</b></p>)`
   );
@@ -128,12 +129,12 @@ const errorPeticion = (err) => {
 /**
  * Captura del evento de actualización de paguina para cagar la data
  */
-d.addEventListener("DOMContentLoaded", getAll);
+d2.addEventListener("DOMContentLoaded", getAll2);
 /**
  * Captura del event del boton de crear o editar
  */
-d.addEventListener("submit", (event) => addSaint(event));
+d2.addEventListener("submit", (event) => addDios(event));
 /**
  * Captura del event del boton de editar y eliminar un santo.
  */
-d.addEventListener("click", (event) => editSaint(event));
+d2.addEventListener("click", (event) => editDios(event));
