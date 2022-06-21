@@ -1,4 +1,5 @@
-//import "@styles/main.css";
+import "@styles/main.css";
+import "@styles/vapor.css";
 import "@assets/db.json";
 
 const container = document.querySelector(".container");
