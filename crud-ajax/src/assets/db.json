@@ -6,9 +6,9 @@
       "constelacion": "Pegaso"
     },
     {
-      "id": 2,
       "nombre": "Shiryu",
-      "constelacion": "Dragón"
+      "constelacion": "Dragón",
+      "id": 2
     },
     {
       "id": 3,
@@ -26,9 +26,9 @@
       "constelacion": "Fénix"
     },
     {
-      "id": 6,
-      "nombre": "shun",
-      "constelacion": "Canser"
+      "nombre": "john",
+      "constelacion": "libra",
+      "id": 7
     }
   ],
   "dioses": [
