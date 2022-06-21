@@ -12,6 +12,10 @@ const template = d.querySelector("#crud-template").content;
 const fragment = d.createDocumentFragment();
 
 // pratica de conectivida con ajax 🤓
+/**
+ * Método generico de ajax para crear peticionens de tipo , GET,POST,PUT, y DELETE.
+ * @param {optios} options objeto de js tipo json que contiene la opcione para configorar el ajax
+ */
 const ajax = (options) => {
   let { url, method, llenarData, error, data } = options;
   const xhr = new XMLHttpRequest();
@@ -36,17 +40,6 @@ const ajax = (options) => {
   xhr.send(JSON.stringify(data));
 };
 
-const llenarData = (res) => {
-  console.log(res);
-
-  res.forEach((el) => {
-    const li = d.createElement("li");
-    li.innerHTML = `${el.name} -- ${el.email} -- ${el.phone}`;
-    container.appendChild(li);
-  });
-  // $xhr.appendChild(container);
-  // container.querySelector("tbody").appendChild(fragment);
-};
 /**
  * Metodo para consultar la data de los santos de Athena, y pintarlos en pantalla
  */
@@ -77,6 +70,10 @@ const getAll = () => {
   });
 };
 
+/**
+ * Metodo para Crear nuevos santos mediarte ajax y el método POST o editar un santo con el método PUT
+ * @param {event} event 
+ */
 const addSaint = (event) => {
   if (event.target === from) {
     //prevenimos el comportamiento por defecto e un formulario
@@ -116,7 +113,10 @@ const addSaint = (event) => {
     }
   }
 };
-
+/**
+ * Método para editar un santo Mediante el métood PUT o eliminarlo Mediante el método DELETE
+ * @param {event} event 
+ */
 const editSaint = (event) => {
   if (event.target.matches(".edit")) {
     title.textContent = "Editar santo";
@@ -142,8 +142,15 @@ const editSaint = (event) => {
   }
 };
 
+/**
+ * Captura del evento de actualización de paguina para cagar la data
+ */
 d.addEventListener("DOMContentLoaded", getAll);
-
+/**
+ * Captura del event del boton de crear o editar 
+ */
 d.addEventListener("submit", (event) => addSaint(event));
-
+/**
+ * Captura del event del boton de editar y eliminar un santo.
+ */
 d.addEventListener("click", (event) => editSaint(event));
