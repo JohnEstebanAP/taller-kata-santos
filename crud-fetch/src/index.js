@@ -38,10 +38,6 @@ const getAll = async () => {
     table.querySelector("tbody").appendChild(fragment);
   } catch (err) {
     errorPeticion(err);
-  } finally {
-    console.log(
-      "Esto se ejecutará independientemente del resultado de la Promesa Fetch."
-    );
   }
 };
 
